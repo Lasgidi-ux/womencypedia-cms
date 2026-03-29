@@ -15,12 +15,18 @@
         "user": {
             "type": "relation",
             "relation": "manyToOne",
-            "target": "plugin::users-permissions.user"
+            "target": "plugin::users-permissions.user",
+            "inversedBy": "bookmarks"
         },
         "biography": {
             "type": "relation",
             "relation": "manyToOne",
-            "target": "api::biography.biography"
+            "target": "api::biography.biography",
+            "inversedBy": "bookmarks"
+        },
+        "bookmarkedAt": {
+            "type": "datetime",
+            "default": null
         }
     }
 }

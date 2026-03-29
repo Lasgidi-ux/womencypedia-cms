@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_histories",
+  "info": {
+    "singularName": "user-history",
+    "pluralName": "user-histories",
+    "displayName": "User History",
+    "description": "User reading history and progress"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "histories"
+    },
+    "biography": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::biography.biography",
+      "inversedBy": "histories"
+    },
+    "readAt": {
+      "type": "datetime",
+      "default": null
+    },
+    "readProgress": {
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 0
+    },
+    "readDuration": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    }
+  }
+}

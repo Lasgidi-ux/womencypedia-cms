@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teaching_resources",
+  "info": {
+    "singularName": "teaching-resource",
+    "pluralName": "teaching-resources",
+    "displayName": "Teaching Resource",
+    "description": "Educational resources for teaching"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "document",
+        "video",
+        "link"
+      ],
+      "required": true
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "downloadText": {
+      "type": "string",
+      "default": "Download"
+    },
+    "externalUrl": {
+      "type": "string",
+      "required": false
+    },
+    "publishedAt": {
+      "type": "datetime",
+      "default": null
+    }
+  }
+}

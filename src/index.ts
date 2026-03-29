@@ -388,6 +388,7 @@ export default {
             'api::contact-submission.contact-submission',
             'api::comment.comment',
             'api::saved-entry.saved-entry',
+            'api::user-history.user-history',
           ];
 
           const authPermissions = await strapi.query('plugin::users-permissions.permission').findMany({
