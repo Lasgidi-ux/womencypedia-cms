@@ -93,6 +93,12 @@
             "relation": "oneToMany",
             "target": "api::saved-entry.saved-entry",
             "mappedBy": "user"
+        },
+        "histories": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::user-history.user-history",
+            "mappedBy": "user"
         }
     }
 }
