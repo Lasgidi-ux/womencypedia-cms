@@ -87,6 +87,12 @@
             "relation": "manyToMany",
             "target": "api::badge.badge",
             "inversedBy": "users"
+        },
+        "bookmarks": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::saved-entry.saved-entry",
+            "mappedBy": "user"
         }
     }
 }
