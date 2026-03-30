@@ -443,5 +443,26 @@ export default {
     } catch (err) {
       strapi.log.error('[Bootstrap] Error setting up permissions:', err);
     }
+
+    // ── Create homepage single type entry if it doesn't exist ──
+    try {
+      const existingHomepage = await strapi.entityService.findMany('api::homepage.homepage');
+      if (!existingHomepage || existingHomepage.length === 0) {
+        await strapi.entityService.create('api::homepage.homepage', {
+          data: {
+            heroTitle: 'Welcome to Womencypedia',
+            heroSubtitle: 'Discover the stories of remarkable women throughout history',
+            heroBadge: 'Empowering Voices',
+            quoteText: '"The strength of a woman is not measured by the impact that all her hardships in life have had on her; but the strength of a woman is measured by the extent of her refusal to allow those hardships to dictate her and who she becomes." - C. JoyBell C.',
+            publishedAt: new Date().toISOString(),
+          },
+        });
+        strapi.log.info('[Bootstrap] Created default homepage entry');
+      } else {
+        strapi.log.info('[Bootstrap] Homepage entry already exists');
+      }
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error creating homepage entry:', err);
+    }
   },
 };
