@@ -447,7 +447,7 @@ export default {
     // ── Create homepage single type entry if it doesn't exist ──
     try {
       const existingHomepage = await strapi.entityService.findMany('api::homepage.homepage');
-      if (!existingHomepage || existingHomepage.length === 0) {
+      if (!existingHomepage) {
         await strapi.entityService.create('api::homepage.homepage', {
           data: {
             heroTitle: 'Welcome to Womencypedia',
