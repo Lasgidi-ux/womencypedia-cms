@@ -8,7 +8,10 @@
     "description": "Manages all homepage content sections"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": true,
+    "preview": {
+      "enabled": false
+    }
   },
   "pluginOptions": {
     "i18n": {
