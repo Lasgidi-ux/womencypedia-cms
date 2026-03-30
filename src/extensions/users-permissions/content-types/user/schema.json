@@ -91,7 +91,7 @@
         "bookmarks": {
             "type": "relation",
             "relation": "oneToMany",
-            "target": "api::saved-entry.saved-entry",
+            "target": "api::user-bookmark.user-bookmark",
             "mappedBy": "user"
         },
         "histories": {

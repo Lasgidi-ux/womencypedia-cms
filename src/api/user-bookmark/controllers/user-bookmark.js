@@ -1,12 +1,12 @@
 'use strict';
 
 /**
- * saved-entry controller
+ * user-bookmark controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::saved-entry.saved-entry', ({ strapi }) => ({
+module.exports = createCoreController('api::user-bookmark.user-bookmark', ({ strapi }) => ({
   // Get user's bookmarks
   async find(ctx) {
     // Only allow authenticated users to see their own bookmarks
@@ -40,7 +40,7 @@ module.exports = createCoreController('api::saved-entry.saved-entry', ({ strapi 
     ctx.request.body.data.bookmarkedAt = new Date();
 
     // Check if bookmark already exists
-    const existing = await strapi.entityService.findMany('api::saved-entry.saved-entry', {
+    const existing = await strapi.entityService.findMany('api::user-bookmark.user-bookmark', {
       filters: {
         user: ctx.state.user.id,
         biography: ctx.request.body.data.biography
@@ -61,7 +61,7 @@ module.exports = createCoreController('api::saved-entry.saved-entry', ({ strapi 
     }
 
     // Ensure user can only delete their own bookmarks
-    const bookmark = await strapi.entityService.findOne('api::saved-entry.saved-entry', ctx.params.id, {
+    const bookmark = await strapi.entityService.findOne('api::user-bookmark.user-bookmark', ctx.params.id, {
       populate: ['user']
     });
 
@@ -78,7 +78,7 @@ module.exports = createCoreController('api::saved-entry.saved-entry', ({ strapi 
       return ctx.unauthorized('You must be authenticated');
     }
 
-    const deletedCount = await strapi.entityService.deleteMany('api::saved-entry.saved-entry', {
+    const deletedCount = await strapi.entityService.deleteMany('api::user-bookmark.user-bookmark', {
       filters: { user: ctx.state.user.id }
     });
 

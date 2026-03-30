@@ -1,10 +1,10 @@
 {
     "kind": "collectionType",
-    "collectionName": "saved_entries",
+    "collectionName": "user_bookmarks",
     "info": {
-        "singularName": "saved-entry",
-        "pluralName": "saved-entries",
-        "displayName": "Saved Entry",
+        "singularName": "user-bookmark",
+        "pluralName": "user-bookmarks",
+        "displayName": "User Bookmark",
         "description": "User saved/bookmarked entries"
     },
     "options": {
