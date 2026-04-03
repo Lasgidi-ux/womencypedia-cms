@@ -201,16 +201,37 @@ export default {
       strapi.log.error('[Bootstrap] Error creating homepage entry:', err);
     }
 
-    // ── Debug content type loading ──
+    // ── Force route registration ──
     try {
-      strapi.log.info('[Bootstrap] Checking content type loading...');
+      strapi.log.info('[Bootstrap] Forcing route registration...');
 
-      // Wait a bit for content types to be fully loaded
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Get the router instance and ensure routes are registered
+      const router = strapi.get('router');
+      if (router) {
+        strapi.log.info('[Bootstrap] Router instance found');
 
-      strapi.log.info('[Bootstrap] Content type loading check completed');
+        // Check if homepage routes are registered
+        const homepageRoutes = router.get('api::homepage.homepage');
+        if (homepageRoutes) {
+          strapi.log.info('[Bootstrap] Homepage routes are registered');
+        } else {
+          strapi.log.warn('[Bootstrap] Homepage routes are NOT registered');
+        }
+
+        // Check biography routes
+        const biographyRoutes = router.get('api::biography.biography');
+        if (biographyRoutes) {
+          strapi.log.info('[Bootstrap] Biography routes are registered');
+        } else {
+          strapi.log.warn('[Bootstrap] Biography routes are NOT registered');
+        }
+      } else {
+        strapi.log.warn('[Bootstrap] Router instance not found');
+      }
+
+      strapi.log.info('[Bootstrap] Route registration check completed');
     } catch (err) {
-      strapi.log.error('[Bootstrap] Error during content type loading check:', err);
+      strapi.log.error('[Bootstrap] Error during route registration check:', err);
     }
 
     // ── Debug: Check content type registration ──
