@@ -98,7 +98,7 @@ module.exports = createCoreController('api::comment.comment', ({ strapi }) => ({
             return ctx.send({ data: responseData });
 
         } catch (error) {
-            console.error('Error toggling like:', error);
+            
             return ctx.internalServerError('Failed to toggle like');
         }
     }

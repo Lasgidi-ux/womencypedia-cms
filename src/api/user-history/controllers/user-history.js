@@ -118,7 +118,7 @@ module.exports = createCoreController('api::user-history.user-history', ({ strap
           created++;
         }
       } catch (error) {
-        console.error('Error syncing history item:', error);
+        
       }
     }
 
