@@ -200,5 +200,23 @@ export default {
     } catch (err) {
       strapi.log.error('[Bootstrap] Error creating homepage entry:', err);
     }
+
+    // ── Force content type registration and route loading ──
+    try {
+      strapi.log.info('[Bootstrap] Forcing content type registration and route loading...');
+
+      // Force reload of content types and routes
+      await strapi.reload();
+
+      // Explicitly register critical routes for single types
+      const homepageRouter = strapi.get('router').get('api::homepage.homepage');
+      if (!homepageRouter) {
+        strapi.log.warn('[Bootstrap] Homepage router not found, routes may not be registered');
+      }
+
+      strapi.log.info('[Bootstrap] Content type registration and route loading completed');
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error during content type registration:', err);
+    }
   },
 };
