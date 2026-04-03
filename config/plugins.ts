@@ -24,23 +24,6 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
         };
     }
 
-    // Enable core Strapi plugins
-    pluginConfig['content-api'] = {
-        enabled: true
-    };
-
-    pluginConfig['content-manager'] = {
-        enabled: true
-    };
-
-    pluginConfig['content-type-builder'] = {
-        enabled: true
-    };
-
-    pluginConfig['upload'] = {
-        enabled: true
-    };
-
     return pluginConfig;
 };
 
