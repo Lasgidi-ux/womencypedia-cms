@@ -24,6 +24,11 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
         };
     }
 
+    // Enable content-manager plugin for admin panel functionality
+    pluginConfig['content-manager'] = {
+        enabled: true
+    };
+
     return pluginConfig;
 };
 
