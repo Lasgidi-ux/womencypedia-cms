@@ -200,5 +200,43 @@ export default {
     } catch (err) {
       strapi.log.error('[Bootstrap] Error creating homepage entry:', err);
     }
+
+    // ── Force content type synchronization ──
+    try {
+      strapi.log.info('[Bootstrap] Forcing content type synchronization...');
+
+      // In Strapi v5, try to sync content types with database
+      if (strapi.contentTypes?.sync) {
+        await strapi.contentTypes.sync();
+        strapi.log.info('[Bootstrap] Content types synchronized with database');
+      } else {
+        strapi.log.info('[Bootstrap] Content type sync method not available');
+      }
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error synchronizing content types:', err);
+    }
+
+    // ── Debug: Check content type registration ──
+    try {
+      strapi.log.info('[Bootstrap] Checking content type registration...');
+
+      // Get all registered content types
+      const contentTypes = Object.keys(strapi.contentTypes || {});
+      strapi.log.info(`[Bootstrap] Registered content types: ${contentTypes.join(', ')}`);
+
+      // Check specific content types
+      const requiredTypes = ['api::biography.biography', 'api::collection.collection', 'api::homepage.homepage'];
+      for (const type of requiredTypes) {
+        if (strapi.contentTypes?.[type]) {
+          strapi.log.info(`[Bootstrap] ✓ Content type ${type} is registered`);
+        } else {
+          strapi.log.warn(`[Bootstrap] ✗ Content type ${type} is NOT registered`);
+        }
+      }
+
+      strapi.log.info('[Bootstrap] Content type check completed');
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error checking content types:', err);
+    }
   },
 };
