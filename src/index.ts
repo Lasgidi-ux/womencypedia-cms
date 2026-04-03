@@ -201,38 +201,8 @@ export default {
       strapi.log.error('[Bootstrap] Error creating homepage entry:', err);
     }
 
-    // ── Force route registration ──
-    try {
-      strapi.log.info('[Bootstrap] Forcing route registration...');
-
-      // Get the router instance and ensure routes are registered
-      const router = strapi.get('router');
-      if (router) {
-        strapi.log.info('[Bootstrap] Router instance found');
-
-        // Check if homepage routes are registered
-        const homepageRoutes = router.get('api::homepage.homepage');
-        if (homepageRoutes) {
-          strapi.log.info('[Bootstrap] Homepage routes are registered');
-        } else {
-          strapi.log.warn('[Bootstrap] Homepage routes are NOT registered');
-        }
-
-        // Check biography routes
-        const biographyRoutes = router.get('api::biography.biography');
-        if (biographyRoutes) {
-          strapi.log.info('[Bootstrap] Biography routes are registered');
-        } else {
-          strapi.log.warn('[Bootstrap] Biography routes are NOT registered');
-        }
-      } else {
-        strapi.log.warn('[Bootstrap] Router instance not found');
-      }
-
-      strapi.log.info('[Bootstrap] Route registration check completed');
-    } catch (err) {
-      strapi.log.error('[Bootstrap] Error during route registration check:', err);
-    }
+    // Routes are now auto-registered via createCoreRouter() in each api/*/routes/*.js file
+    strapi.log.info('[Bootstrap] Routes will be auto-registered by Strapi v5 core routers');
 
     // ── Debug: Check content type registration ──
     try {

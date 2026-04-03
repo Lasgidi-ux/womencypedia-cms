@@ -3,21 +3,10 @@
 /**
  * homepage router
  *
- * Explicitly defines routes for the homepage single type.
+ * Uses Strapi v5 createCoreRouter for automatic route generation.
  * Public permissions are managed via Settings > Roles > Public in the admin panel.
  */
 
-module.exports = {
-  type: 'content-api',
-  routes: [
-    {
-      method: 'GET',
-      path: '/homepage',
-      handler: 'homepage.find',
-      config: {
-        policies: [],
-        middlewares: [],
-      },
-    },
-  ],
-};
+const { createCoreRouter } = require('@strapi/strapi').factories;
+
+module.exports = createCoreRouter('api::homepage.homepage');

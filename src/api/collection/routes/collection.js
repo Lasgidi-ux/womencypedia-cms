@@ -3,29 +3,10 @@
 /**
  * collection router
  *
- * Explicitly defines routes for collection type.
+ * Uses Strapi v5 createCoreRouter for automatic route generation.
+ * Public permissions are managed via Settings > Roles > Public in the admin panel.
  */
 
-module.exports = {
-  type: 'content-api',
-  routes: [
-    {
-      method: 'GET',
-      path: '/collections',
-      handler: 'collection.find',
-      config: {
-        policies: [],
-        middlewares: [],
-      },
-    },
-    {
-      method: 'GET',
-      path: '/collections/:id',
-      handler: 'collection.findOne',
-      config: {
-        policies: [],
-        middlewares: [],
-      },
-    },
-  ],
-};
+const { createCoreRouter } = require('@strapi/strapi').factories;
+
+module.exports = createCoreRouter('api::collection.collection');
