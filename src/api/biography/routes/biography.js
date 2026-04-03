@@ -2,11 +2,31 @@
 
 /**
  * biography router
- * 
- * Uses Strapi v5 core router for standard CRUD operations.
+ *
+ * Explicitly defines routes for biography collection type.
  * Public permissions are managed via Settings > Roles > Public in the admin panel.
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::biography.biography');
+module.exports = {
+  type: 'content-api',
+  routes: [
+    {
+      method: 'GET',
+      path: '/biographies',
+      handler: 'biography.find',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/biographies/:id',
+      handler: 'biography.findOne',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+  ],
+};
