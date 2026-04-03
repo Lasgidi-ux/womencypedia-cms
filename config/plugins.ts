@@ -24,6 +24,11 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
         };
     }
 
+    // Enable REST API plugin for /api/* endpoints
+    pluginConfig['content-api'] = {
+        enabled: true
+    };
+
     return pluginConfig;
 };
 
