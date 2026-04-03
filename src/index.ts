@@ -201,19 +201,16 @@ export default {
       strapi.log.error('[Bootstrap] Error creating homepage entry:', err);
     }
 
-    // ── Force content type synchronization ──
+    // ── Debug content type loading ──
     try {
-      strapi.log.info('[Bootstrap] Forcing content type synchronization...');
+      strapi.log.info('[Bootstrap] Checking content type loading...');
 
-      // In Strapi v5, try to sync content types with database
-      if (strapi.contentTypes?.sync) {
-        await strapi.contentTypes.sync();
-        strapi.log.info('[Bootstrap] Content types synchronized with database');
-      } else {
-        strapi.log.info('[Bootstrap] Content type sync method not available');
-      }
+      // Wait a bit for content types to be fully loaded
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      strapi.log.info('[Bootstrap] Content type loading check completed');
     } catch (err) {
-      strapi.log.error('[Bootstrap] Error synchronizing content types:', err);
+      strapi.log.error('[Bootstrap] Error during content type loading check:', err);
     }
 
     // ── Debug: Check content type registration ──
