@@ -9,7 +9,11 @@
     },
     "options": {
         "draftAndPublish": true,
-        "i18n": true
+        "i18n": true,
+        "preview": {
+            "enabled": true,
+            "url": "https://womencypedia.org/collection.html?slug={slug}"
+        }
     },
     "pluginOptions": {
         "i18n": {

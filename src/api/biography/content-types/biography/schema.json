@@ -8,7 +8,11 @@
     "description": "Interpretive biographies of remarkable women throughout history"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": true,
+    "preview": {
+      "enabled": true,
+      "url": "https://womencypedia.org/biography.html?slug={slug}"
+    }
   },
   "pluginOptions": {
     "i18n": {
