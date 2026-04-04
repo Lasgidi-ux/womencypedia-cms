@@ -1,0 +1,56 @@
+
+> womencypedia-cms@0.1.0 build
+> strapi build
+
+- Compiling TS
+[96msrc/api/badge/controllers/badge.ts[0m:[93m3[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::badge.badge"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreController('api::badge.badge');
+[7m [0m [91m                                              ~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/badge/routes/badge.ts[0m:[93m3[0m:[93m43[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::badge.badge"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreRouter('api::badge.badge');
+[7m [0m [91m                                          ~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/badge/services/badge.ts[0m:[93m3[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::badge.badge"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreService('api::badge.badge');
+[7m [0m [91m                                           ~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/teaching-resource/controllers/teaching-resource.ts[0m:[93m3[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::teaching-resource.teaching-resource"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreController('api::teaching-resource.teaching-resource');
+[7m [0m [91m                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/teaching-resource/routes/teaching-resource.ts[0m:[93m3[0m:[93m43[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::teaching-resource.teaching-resource"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreRouter('api::teaching-resource.teaching-resource');
+[7m [0m [91m                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/teaching-resource/services/teaching-resource.ts[0m:[93m3[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::teaching-resource.teaching-resource"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreService('api::teaching-resource.teaching-resource');
+[7m [0m [91m                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/user-bookmark/controllers/user-bookmark.ts[0m:[93m3[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::user-bookmark.user-bookmark"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreController('api::user-bookmark.user-bookmark');
+[7m [0m [91m                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/user-bookmark/routes/user-bookmark.ts[0m:[93m3[0m:[93m43[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::user-bookmark.user-bookmark"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreRouter('api::user-bookmark.user-bookmark');
+[7m [0m [91m                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/user-bookmark/services/user-bookmark.ts[0m:[93m3[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::user-bookmark.user-bookmark"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreService('api::user-bookmark.user-bookmark');
+[7m [0m [91m                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/user-history/controllers/user-history.ts[0m:[93m3[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::user-history.user-history"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreController('api::user-history.user-history');
+[7m [0m [91m                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/user-history/routes/user-history.ts[0m:[93m3[0m:[93m43[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::user-history.user-history"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreRouter('api::user-history.user-history');
+[7m [0m [91m                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/api/user-history/services/user-history.ts[0m:[93m3[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type '"api::user-history.user-history"' is not assignable to parameter of type 'ContentType'.
+
+[7m3[0m export default factories.createCoreService('api::user-history.user-history');
+[7m [0m [91m                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+Found 12 error(s).
+
