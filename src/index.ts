@@ -208,7 +208,7 @@ export default {
 
     // ── Create sample enterprise entries if they don't exist ──
     try {
-      const existingEnterprises = await strapi.entityService.findMany('api::enterprise.enterprise');
+      const existingEnterprises = await strapi.entityService.findMany('api::enterprise.enterprise' as any);
       const enterpriseCategories = [
         'Trade & Commerce',
         'Agriculture & Food',
@@ -222,7 +222,7 @@ export default {
 
       if (existingEnterprises.length === 0) {
         for (const category of enterpriseCategories) {
-          await strapi.entityService.create('api::enterprise.enterprise', {
+          await strapi.entityService.create('api::enterprise.enterprise' as any, {
             data: {
               title: category,
               slug: category.toLowerCase().replace(/\s*&\s*/g, '-').replace(/\s+/g, '-'),
