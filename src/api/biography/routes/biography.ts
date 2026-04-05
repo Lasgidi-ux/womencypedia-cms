@@ -1,18 +1,25 @@
 // @ts-nocheck
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::biography.biography', {
-  config: {
-    find: {
-      policies: [],
-      middlewares: [],
-    },
-    findOne: {
-      policies: [],
-      middlewares: [],
-    },
-  },
+export default {
+  type: 'content-api',
   routes: [
+    {
+      method: 'GET',
+      path: '/biographies',
+      handler: 'biography.find',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/biographies/:id',
+      handler: 'biography.findOne',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
     {
       method: 'GET',
       path: '/preview/:documentId',
@@ -23,4 +30,4 @@ export default factories.createCoreRouter('api::biography.biography', {
       },
     },
   ],
-});
+};

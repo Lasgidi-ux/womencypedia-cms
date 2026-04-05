@@ -1,15 +1,24 @@
 // @ts-nocheck
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::collection.collection', {
-  config: {
-    find: {
-      policies: [],
-      middlewares: [],
+export default {
+  type: 'content-api',
+  routes: [
+    {
+      method: 'GET',
+      path: '/collections',
+      handler: 'collection.find',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
     },
-    findOne: {
-      policies: [],
-      middlewares: [],
+    {
+      method: 'GET',
+      path: '/collections/:id',
+      handler: 'collection.findOne',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
     },
-  },
-});
+  ],
+};

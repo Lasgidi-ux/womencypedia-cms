@@ -1,11 +1,15 @@
 // @ts-nocheck
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::homepage.homepage', {
-  config: {
-    find: {
-      policies: [],
-      middlewares: [],
+export default {
+  type: 'content-api',
+  routes: [
+    {
+      method: 'GET',
+      path: '/homepage',
+      handler: 'homepage.find',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
     },
-  },
-});
+  ],
+};
