@@ -92,6 +92,9 @@ export default {
         // Teaching Resource
         { action: 'api::teaching-resource.teaching-resource.find' },
         { action: 'api::teaching-resource.teaching-resource.findOne' },
+        // Enterprise
+        { action: 'api::enterprise.enterprise.find' },
+        { action: 'api::enterprise.enterprise.findOne' },
       ];
 
       const publicSubmitPermissions = [
@@ -148,6 +151,8 @@ export default {
           { action: 'api::user-bookmark.user-bookmark.delete' },
           { action: 'api::user-history.user-history.create' },
           { action: 'api::user-history.user-history.find' },
+          { action: 'api::enterprise.enterprise.find' },
+          { action: 'api::enterprise.enterprise.findOne' },
         ];
 
         const existingAuthPermissions = await strapi.query('plugin::users-permissions.permission').findMany({
@@ -199,6 +204,41 @@ export default {
       }
     } catch (err) {
       strapi.log.error('[Bootstrap] Error creating homepage entry:', err);
+    }
+
+    // ── Create sample enterprise entries if they don't exist ──
+    try {
+      const existingEnterprises = await strapi.entityService.findMany('api::enterprise.enterprise');
+      const enterpriseCategories = [
+        'Trade & Commerce',
+        'Agriculture & Food',
+        'Manufacturing',
+        'Healthcare & Medicine',
+        'Finance & Banking',
+        'Education',
+        'Arts & Crafts',
+        'Technology'
+      ];
+
+      if (existingEnterprises.length === 0) {
+        for (const category of enterpriseCategories) {
+          await strapi.entityService.create('api::enterprise.enterprise', {
+            data: {
+              title: category,
+              slug: category.toLowerCase().replace(/\s*&\s*/g, '-').replace(/\s+/g, '-'),
+              description: `Women's contributions and innovations in ${category.toLowerCase()}.`,
+              category: category,
+              featured: true,
+              publishedAt: new Date(),
+            },
+          });
+        }
+        strapi.log.info('[Bootstrap] Created sample enterprise entries');
+      } else {
+        strapi.log.info('[Bootstrap] Enterprise entries already exist');
+      }
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error creating enterprise entries:', err);
     }
 
     // Routes are now auto-registered via createCoreRouter() in each api/*/routes/*.js file
