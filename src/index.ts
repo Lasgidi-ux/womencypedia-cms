@@ -95,6 +95,21 @@ export default {
         // Enterprise
         { action: 'api::enterprise.enterprise.find' },
         { action: 'api::enterprise.enterprise.findOne' },
+        // Reading List
+        { action: 'api::reading-list.reading-list.find' },
+        { action: 'api::reading-list.reading-list.findOne' },
+        // Glossary
+        { action: 'api::glossary.glossary.find' },
+        { action: 'api::glossary.glossary.findOne' },
+        // Timeline
+        { action: 'api::timeline.timeline.find' },
+        { action: 'api::timeline.timeline.findOne' },
+        // Interactive Map
+        { action: 'api::interactive-map.interactive-map.find' },
+        { action: 'api::interactive-map.interactive-map.findOne' },
+        // Research Tool
+        { action: 'api::research-tool.research-tool.find' },
+        { action: 'api::research-tool.research-tool.findOne' },
       ];
 
       const publicSubmitPermissions = [
@@ -153,6 +168,16 @@ export default {
           { action: 'api::user-history.user-history.find' },
           { action: 'api::enterprise.enterprise.find' },
           { action: 'api::enterprise.enterprise.findOne' },
+          { action: 'api::reading-list.reading-list.find' },
+          { action: 'api::reading-list.reading-list.findOne' },
+          { action: 'api::glossary.glossary.find' },
+          { action: 'api::glossary.glossary.findOne' },
+          { action: 'api::timeline.timeline.find' },
+          { action: 'api::timeline.timeline.findOne' },
+          { action: 'api::interactive-map.interactive-map.find' },
+          { action: 'api::interactive-map.interactive-map.findOne' },
+          { action: 'api::research-tool.research-tool.find' },
+          { action: 'api::research-tool.research-tool.findOne' },
         ];
 
         const existingAuthPermissions = await strapi.query('plugin::users-permissions.permission').findMany({
@@ -239,6 +264,91 @@ export default {
       }
     } catch (err) {
       strapi.log.error('[Bootstrap] Error creating enterprise entries:', err);
+    }
+
+    // ── Create sample glossary entries if they don't exist ──
+    try {
+      const existingGlossary = await strapi.entityService.findMany('api::glossary.glossary' as any);
+
+      if (existingGlossary.length === 0) {
+        const glossaryTerms = [
+          { term: 'Matriarchy', definition: 'A social system where women hold primary power and authority.', category: 'Social' },
+          { term: 'Suffrage', definition: 'The right to vote in political elections.', category: 'Political' },
+          { term: 'Feminism', definition: 'Advocacy for women\'s rights on the basis of equality of the sexes.', category: 'Social' },
+          { term: 'Patriarchy', definition: 'A social system where men hold primary power and authority.', category: 'Social' },
+          { term: 'Intersectionality', definition: 'The overlapping of social identities that contribute to discrimination.', category: 'Social' },
+          { term: 'Empowerment', definition: 'The process of becoming stronger and more confident.', category: 'Social' }
+        ];
+
+        for (const term of glossaryTerms) {
+          await strapi.entityService.create('api::glossary.glossary' as any, {
+            data: {
+              term: term.term,
+              definition: term.definition,
+              category: term.category,
+              featured: true,
+              publishedAt: new Date(),
+            },
+          });
+        }
+        strapi.log.info('[Bootstrap] Created sample glossary entries');
+      } else {
+        strapi.log.info('[Bootstrap] Glossary entries already exist');
+      }
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error creating glossary entries:', err);
+    }
+
+    // ── Create sample reading list entries if they don't exist ──
+    try {
+      const existingReadingLists = await strapi.entityService.findMany('api::reading-list.reading-list' as any);
+
+      if (existingReadingLists.length === 0) {
+        const readingLists = [
+          {
+            title: 'African Women Leaders',
+            theme: 'Leadership',
+            region: 'Africa',
+            books: [
+              { title: 'Warrior Women of Africa', author: 'Mariama Bâ' },
+              { title: 'The Strength of Our Mothers', author: 'Niara Sudarkasa' },
+              { title: 'African Women in Revolution', author: 'Wunyabari O. Maloba' }
+            ]
+          },
+          {
+            title: 'Medieval European Queens',
+            theme: 'Politics',
+            region: 'Europe',
+            era: 'Pre-colonial',
+            books: [
+              { title: 'Queens of the Conquest', author: 'Alison Weir' },
+              { title: 'Eleanor of Aquitaine', author: 'Marion Meade' },
+              { title: 'The She-Wolves', author: 'Helen Castor' }
+            ]
+          }
+        ];
+
+        for (const list of readingLists) {
+          await strapi.entityService.create('api::reading-list.reading-list' as any, {
+            data: {
+              title: list.title,
+              slug: list.title.toLowerCase().replace(/\s+/g, '-'),
+              description: `Curated reading list on ${list.theme}.`,
+              theme: list.theme,
+              region: list.region,
+              era: list.era,
+              books: list.books,
+              featured: true,
+              publishedAt: new Date(),
+            },
+          });
+        }
+        strapi.log.info('[Bootstrap] Created sample reading list entries');
+      } else {
+        strapi.log.info('[Bootstrap] Reading list entries already exist');
+      }
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error creating reading list entries:', err);
     }
 
     // Routes are now auto-registered via createCoreRouter() in each api/*/routes/*.js file

@@ -1,0 +1,92 @@
+{
+  "kind": "collectionType",
+  "collectionName": "glossaries",
+  "info": {
+    "singularName": "glossary",
+    "pluralName": "glossaries",
+    "displayName": "Glossary",
+    "description": "Cultural, historical, and linguistic terms with definitions"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "term": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "term",
+      "required": true
+    },
+    "definition": {
+      "type": "richtext",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "category": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "enum": [
+        "Cultural",
+        "Historical",
+        "Linguistic",
+        "Political",
+        "Social",
+        "Religious"
+      ]
+    },
+    "region": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "enum": [
+        "Africa",
+        "Europe",
+        "Asia",
+        "Middle East",
+        "North America",
+        "South America",
+        "Oceania",
+        "Global"
+      ]
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "relatedTerms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::glossary.glossary",
+      "inversedBy": "relatedTerms"
+    }
+  }
+}
