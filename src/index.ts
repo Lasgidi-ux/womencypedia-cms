@@ -351,6 +351,58 @@ export default {
       strapi.log.error('[Bootstrap] Error creating reading list entries:', err);
     }
 
+    // ── Create sample teaching resource entries if they don't exist ──
+    try {
+      const existingTeachingResources = await strapi.entityService.findMany('api::teaching-resource.teaching-resource' as any);
+
+      if (existingTeachingResources.length === 0) {
+        const teachingResources = [
+          {
+            title: "Educator's Guide",
+            description: "Comprehensive guide for educators teaching about women's history and contributions.",
+            type: "document",
+            downloadText: "Download"
+          },
+          {
+            title: "Timeline Poster",
+            description: "Visual timeline poster showing key milestones in women's history.",
+            type: "document",
+            downloadText: "Download"
+          },
+          {
+            title: "Research Guide",
+            description: "Guide for conducting research on women's history and contributions.",
+            type: "document",
+            downloadText: "Download"
+          },
+          {
+            title: "Glossary Quick Reference",
+            description: "Quick reference guide to key terms and concepts in women's history.",
+            type: "document",
+            downloadText: "Download"
+          }
+        ];
+
+        for (const resource of teachingResources) {
+          await strapi.entityService.create('api::teaching-resource.teaching-resource' as any, {
+            data: {
+              title: resource.title,
+              slug: resource.title.toLowerCase().replace(/['\s]+/g, '-').replace(/[^a-z0-9-]/g, ''),
+              description: resource.description,
+              type: resource.type,
+              downloadText: resource.downloadText,
+              publishedAt: new Date(),
+            },
+          });
+        }
+        strapi.log.info('[Bootstrap] Created sample teaching resource entries');
+      } else {
+        strapi.log.info('[Bootstrap] Teaching resource entries already exist');
+      }
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error creating teaching resource entries:', err);
+    }
+
     // Routes are now auto-registered via createCoreRouter() in each api/*/routes/*.js file
     strapi.log.info('[Bootstrap] Routes will be auto-registered by Strapi v5 core routers');
 
