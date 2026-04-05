@@ -235,6 +235,12 @@
       "relation": "oneToMany",
       "target": "api::user-history.user-history",
       "mappedBy": "biography"
+    },
+    "enterprises": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::enterprise.enterprise",
+      "mappedBy": "biographies"
     }
   }
 }
