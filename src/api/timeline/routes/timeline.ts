@@ -1,10 +1,14 @@
 // @ts-nocheck
-export default {
-  type: 'content-api',
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::timeline.timeline', {
+  only: [],
+  except: ['find', 'findOne'],
+  config: {},
   routes: [
     {
       method: 'GET',
-      path: '/timelines',
+      path: '/timeline-events',
       handler: 'timeline.find',
       config: {
         policies: [],
@@ -13,7 +17,7 @@ export default {
     },
     {
       method: 'GET',
-      path: '/timelines/:id',
+      path: '/timeline-events/:id',
       handler: 'timeline.findOne',
       config: {
         policies: [],
@@ -21,4 +25,4 @@ export default {
       },
     },
   ],
-};
+});

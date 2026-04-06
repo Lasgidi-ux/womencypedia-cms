@@ -1,10 +1,14 @@
 // @ts-nocheck
-export default {
-  type: 'content-api',
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::glossary.glossary', {
+  only: [],
+  except: ['find', 'findOne'],
+  config: {},
   routes: [
     {
       method: 'GET',
-      path: '/glossaries',
+      path: '/glossary-terms',
       handler: 'glossary.find',
       config: {
         policies: [],
@@ -13,7 +17,7 @@ export default {
     },
     {
       method: 'GET',
-      path: '/glossaries/:id',
+      path: '/glossary-terms/:id',
       handler: 'glossary.findOne',
       config: {
         policies: [],
@@ -21,4 +25,4 @@ export default {
       },
     },
   ],
-};
+});

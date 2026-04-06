@@ -1,10 +1,14 @@
 // @ts-nocheck
-export default {
-  type: 'content-api',
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::interactive-map.interactive-map', {
+  only: [],
+  except: ['find', 'findOne'],
+  config: {},
   routes: [
     {
       method: 'GET',
-      path: '/interactive-maps',
+      path: '/maps',
       handler: 'interactive-map.find',
       config: {
         policies: [],
@@ -13,7 +17,7 @@ export default {
     },
     {
       method: 'GET',
-      path: '/interactive-maps/:id',
+      path: '/maps/:id',
       handler: 'interactive-map.findOne',
       config: {
         policies: [],
@@ -21,4 +25,4 @@ export default {
       },
     },
   ],
-};
+});
