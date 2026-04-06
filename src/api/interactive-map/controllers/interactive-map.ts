@@ -1,0 +1,5 @@
+// @ts-nocheck
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreController('api::interactive-map.interactive-map');
+module.exports = createCoreController('api::interactive-map.interactive-map');

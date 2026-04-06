@@ -86,7 +86,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::glossary.glossary",
-      "inversedBy": "relatedTerms"
+      "mappedBy": "relatedTerms"
     }
   }
 }

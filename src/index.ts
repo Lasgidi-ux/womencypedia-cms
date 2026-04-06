@@ -233,6 +233,15 @@ export default {
 
     // ── Create sample enterprise entries if they don't exist ──
     try {
+      strapi.log.info('[Bootstrap] Checking strapi.entityService availability...');
+      strapi.log.info(`[Bootstrap] strapi.entityService exists: ${!!strapi.entityService}`);
+      strapi.log.info(`[Bootstrap] strapi.entityService type: ${typeof strapi.entityService}`);
+
+      if (!strapi.entityService) {
+        strapi.log.warn('[Bootstrap] strapi.entityService not available, skipping enterprise data creation');
+        return;
+      }
+
       const existingEnterprises = await strapi.entityService.findMany('api::enterprise.enterprise' as any);
       const enterpriseCategories = [
         'Trade & Commerce',
@@ -401,6 +410,58 @@ export default {
       }
     } catch (err) {
       strapi.log.error('[Bootstrap] Error creating teaching resource entries:', err);
+    }
+
+    // ── Create sample education module entries if they don't exist ──
+    try {
+      const existingEducationModules = await strapi.entityService.findMany('api::education-module.education-module' as any);
+
+      if (existingEducationModules.length === 0) {
+        const educationModules = [
+          {
+            title: "Introduction to Women's History",
+            description: "An introductory module exploring the foundations of women's history and key figures who shaped societal change.",
+            order: 1,
+            featured: true
+          },
+          {
+            title: "Women in Science and Technology",
+            description: "Discover groundbreaking women who revolutionized science, medicine, and technology throughout history.",
+            order: 2,
+            featured: true
+          },
+          {
+            title: "Artistic Contributions of Women",
+            description: "Explore how women artists, writers, and creators have influenced cultural movements and artistic expression.",
+            order: 3,
+            featured: true
+          },
+          {
+            title: "Women in Leadership and Politics",
+            description: "Learn about women who broke barriers in politics, governance, and social leadership roles.",
+            order: 4,
+            featured: true
+          }
+        ];
+
+        for (const module of educationModules) {
+          await strapi.entityService.create('api::education-module.education-module' as any, {
+            data: {
+              title: module.title,
+              slug: module.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+              description: module.description,
+              order: module.order,
+              featured: module.featured,
+              publishedAt: new Date(),
+            },
+          });
+        }
+        strapi.log.info('[Bootstrap] Created sample education module entries');
+      } else {
+        strapi.log.info('[Bootstrap] Education module entries already exist');
+      }
+    } catch (err) {
+      strapi.log.error('[Bootstrap] Error creating education module entries:', err);
     }
 
     // Routes are now auto-registered via createCoreRouter() in each api/*/routes/*.js file

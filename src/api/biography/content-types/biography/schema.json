@@ -241,6 +241,12 @@
       "relation": "manyToMany",
       "target": "api::enterprise.enterprise",
       "mappedBy": "biographies"
+    },
+    "glossaries": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::glossary.glossary",
+      "mappedBy": "biographies"
     }
   }
 }
